@@ -1,16 +1,16 @@
 <template>
   <div>
-
+    <QuizCard />
   </div>
 </template>
 
 <script>
-
+import QuizCard from './components/QuizCards.vue'
 
 export default {
   name: 'App',
   components: {
-    
+    QuizCard,
   }
 }
 </script>
