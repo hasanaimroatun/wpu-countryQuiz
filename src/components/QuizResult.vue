@@ -2,9 +2,12 @@
     <div>
         <div class="card text-center mt-3" :style="{width: '464px', background: 'white'}">
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
+                <h5 class="card-title">Results</h5>
                 <div class="btnContainer">
-                    Result
+                    <div>You got 4 correct answers</div>
+                    <button type="button" class="btn btn-outline-secondary" @click="$emit('showQuestions')">
+                        Try again
+                    </button>
                 </div>
             </div>
         </div>
@@ -14,7 +17,7 @@
 <script>
     export default {
         name: 'Quiz-result',
-        props: ['activeTab']
+        emits: ['showQuestions']
     }
 </script>
 
