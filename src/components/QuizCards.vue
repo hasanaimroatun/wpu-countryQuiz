@@ -1,18 +1,19 @@
 <template>
     <div>
         <div class="position-absolute top-50 start-50 translate-middle">
-            <div class="text-start" :style="{width: '464px'}">COUNTRY QUIZ</div>
-            
+            <div class="text-start" id="title">COUNTRY QUIZ</div>
             <keep-alive>
                 <component 
                     :is="activeTab" 
+                    :showNext="showNext"
                     class="content" 
                     @showResult='sResult'
                     @showQuestions='sQuestions'
+                    @showTrue='sTrueOrFalse'
                 />
             </keep-alive>
         </div>
-        <div class="createdBy mb-4 position-absolute bottom-0 start-50 translate-middle-x">
+        <div class="createdBy position-absolute bottom-0 start-50 translate-middle-x">
             created by <a href="https://github.com/hasanaimroatun/wpu-countryQuiz">hasanaimroatun</a> - devChallenges.io
         </div>
     </div>
@@ -30,7 +31,8 @@ import QuizResult from './QuizResult.vue'
         },
         data() {
             return {
-               activeTab: 'QuizQuestions' 
+               activeTab: 'QuizQuestions',
+               showNext: false,
             }
         },
         methods: {
@@ -39,6 +41,10 @@ import QuizResult from './QuizResult.vue'
             },
             sQuestions() {
                 this.activeTab = 'QuizQuestions'
+                this.showNext = false
+            },
+            sTrueOrFalse() {
+                this.showNext = true
             }
         }
     }
@@ -46,6 +52,14 @@ import QuizResult from './QuizResult.vue'
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+#title {
+    width: 464px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #F2F2F2;
+}
 
 .createdBy {
     font-family: 'Montserrat', sans-serif;
