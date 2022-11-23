@@ -4,7 +4,12 @@
             <div class="text-start" :style="{width: '464px'}">COUNTRY QUIZ</div>
             
             <keep-alive>
-                <component :is="activeTab" class="content" :activeTab='activeTab'/>
+                <component 
+                    :is="activeTab" 
+                    class="content" 
+                    @showResult='sResult'
+                    @showQuestions='sQuestions'
+                />
             </keep-alive>
         </div>
         <div class="createdBy mb-4 position-absolute bottom-0 start-50 translate-middle-x">
@@ -26,6 +31,14 @@ import QuizResult from './QuizResult.vue'
         data() {
             return {
                activeTab: 'QuizQuestions' 
+            }
+        },
+        methods: {
+            sResult() {
+                this.activeTab = 'QuizResult'
+            },
+            sQuestions() {
+                this.activeTab = 'QuizQuestions'
             }
         }
     }
