@@ -34,22 +34,6 @@ import QuizResult from './QuizResult.vue'
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Poppins:wght@400;500;600;700&display=swap');
 
-.card-body {
-    font-family: 'Poppins', sans-serif;
-    padding: 68px 32px;
-    box-sizing: border-box;
-}
-
-.card-title {
-    margin-bottom: 32px;
-}
-
-.btn {
-    width: 400px;
-    height: 56px;
-    padding-left: 19px;
-}
-
 .createdBy {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
