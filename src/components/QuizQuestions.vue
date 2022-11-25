@@ -25,7 +25,11 @@
                         <span :style="{marginLeft: '15px'}">{{Questions[qIndex].options.d}}</span>
                     </button> -->
                     <div v-for="(opt, index) in ['A', 'B', 'C', 'D']" :key="opt">
-                        <button type="button" class="btn text-start" @click="$emit('showTrue')">
+                        <button 
+                            type="button" 
+                            class="btn text-start option" 
+                            @click="$emit('showTrue'); showTOrF($event)"
+                        >
                             {{opt}} <span>{{Questions[indx].options[index]}}</span> 
                         </button> 
                     </div>
@@ -37,7 +41,7 @@
                                     type="button" 
                                     class="btn text-start" 
                                     id="btnNextResult" 
-                                    @click="$emit('showQuestion')"
+                                    @click="$emit('showQuestion'); bgDefault()"
                                     v-text="stringBtn"
                                 >
                         
@@ -48,7 +52,7 @@
                                     type="button" 
                                     class="btn text-start" 
                                     id="btnNextResult" 
-                                    @click="$emit('showResult')"
+                                    @click="$emit('showResult'); bgDefault()"
                                 >
                                     Total Result
                                 </button>
@@ -130,6 +134,54 @@ import Questions from './questions.json'
                     this.indx += 1
                 } else {
                     this.indx -= (this.Questions.length - 1)
+                }
+            },
+            showTOrF(e) {
+                // if(e.currentTarget.childNodes[1].textContent === this.Questions[this.indx].answer){
+                //     console.log(true)
+                //     e.target.style.backgroundColor = '#60BF88'
+                //     e.target.style.border = '1px solid #60BF88'
+                //     e.target.style.color = 'white'
+                // } else {
+                //     console.log(false) 
+                //     e.target.style.backgroundColor = '#EA8282'
+                //     e.target.style.border = '1px solid #EA8282'
+                //     e.target.style.color = 'white'
+                // }
+
+                const bOption = document.querySelectorAll('.option')
+                for(let i = 0; i < bOption.length; i++) {
+                    if(bOption[i].childNodes[1].textContent === this.Questions[this.indx].answer) {
+                        bOption[i].style.backgroundColor = '#60BF88'
+                        bOption[i].style.border = '1px solid #60BF88'
+                        bOption[i].style.color = 'white'
+                    }
+                    bOption[i].style.opacity = '1'
+                }
+
+                if(e.currentTarget.childNodes[1].textContent !== this.Questions[this.indx].answer){
+                    console.log(false)
+                    e.target.style.backgroundColor = '#EA8282'
+                    e.target.style.border = '1px solid #EA8282'
+                    e.target.style.color = 'white'
+                }
+            },
+            bgDefault() {
+                const bOption = document.querySelectorAll('.option')
+                for(let i = 0; i < bOption.length; i++) {
+                    bOption[i].style.backgroundColor = 'white'
+                    bOption[i].style.border = '1px solid #6066D0'
+                    bOption[i].style.color = '#6066D0'
+                    bOption[i].style.opacity = '70%'
+                }
+            },
+            bgFocusHover() {
+                const bOption = document.querySelectorAll('.option')
+                for(let i = 0; i < bOption.length; i++) {
+                    bOption[i].style.backgroundColor = '#F9A826'
+                    bOption[i].style.border = '1px solid #F9A826'
+                    bOption[i].style.color = '#white'
+                    bOption[i].style.opacity = '1'
                 }
             }
         }
