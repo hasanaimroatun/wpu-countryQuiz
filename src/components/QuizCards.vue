@@ -9,7 +9,7 @@
                     class="content" 
                     @showResult='sResult'
                     @showQuestions='sQuestions'
-                    @showTrue='sTrueOrFalse'
+                    @showTrue='sTrueOrFalse($event)'
                 />
             </keep-alive>
         </div>
@@ -41,12 +41,13 @@ import QuizResult from './QuizResult.vue'
             },
             sQuestions() {
                 this.activeTab = 'QuizQuestions'
-                this.showNext = false
+                this.showNext = false 
             },
             sTrueOrFalse() {
                 this.showNext = true
             }
-        }
+        },
+       
     }
 </script>
 
