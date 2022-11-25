@@ -3,34 +3,56 @@
         <div class="card text-center" :style="{width: '464px', background: 'white'}">
             <div class="card-body" :style="paddingStyle">
                 <img :src="Logo1" alt="logo1" id="logo1">
-                <h5 class="card-title">Special title treatment</h5>
+                <div v-show="Questions[indx].picURL">
+                    <img :src="Questions[indx].picURL" alt="image" :style="{width: '80px', marginTop: '-32px', marginLeft: '72px'}" class="position-absolute start-0 translate-middle">
+                </div>
+                <h5 class="card-title text-start">{{Questions[indx].question}}</h5> 
                 <div class="btnContainer d-flex flex-column gap-4">
-                    <button type="button" class="btn text-start" @click="$emit('showTrue')">
+                    <!-- <button type="button" class="btn text-start" @click="$emit('showTrue')">
                         <span>A</span>
-                        <span class="me-3"></span>
+                        <span :style="{marginLeft: '15px'}">{{Questions[qIndex].options.a}}</span>
                     </button>
                     <button type="button" class="btn text-start" @click="$emit('showTrue')">
                         <span>B</span>
-                        <span class="me-3"></span>
+                        <span :style="{marginLeft: '15px'}">{{Questions[qIndex].options.b}}</span>
                     </button>
                     <button type="button" class="btn text-start" @click="$emit('showTrue')">
                         <span>C</span>
-                        <span class="me-3"></span>
+                        <span :style="{marginLeft: '15px'}">{{Questions[qIndex].options.c}}</span>
                     </button>
                     <button type="button" class="btn text-start" @click="$emit('showTrue')">
                         <span>D</span>
-                        <span class="me-3"></span>
-                    </button>
+                        <span :style="{marginLeft: '15px'}">{{Questions[qIndex].options.d}}</span>
+                    </button> -->
+                    <div v-for="(opt, index) in ['A', 'B', 'C', 'D']" :key="opt">
+                        <button type="button" class="btn text-start" @click="$emit('showTrue')">
+                            {{opt}} <span>{{Questions[indx].options[index]}}</span> 
+                        </button> 
+                    </div>
+                    
                     <div v-show="showNext">
-                        <div class="d-flex justify-content-end" :style="{width: '400px'}">
-                            <button 
-                                type="button" 
-                                class="btn text-start" 
-                                id="btnNext" 
-                                @click="$emit('showResult')"
-                            >
-                                Next
-                            </button>
+                        <div class="d-flex justify-content-end" :style="{width: '400px'}" @click="bNextOrResult($event)">
+                            <div v-if="this.indx < Questions.length - 1">
+                                <button 
+                                    type="button" 
+                                    class="btn text-start" 
+                                    id="btnNextResult" 
+                                    @click="$emit('showQuestion')"
+                                    v-text="stringBtn"
+                                >
+                        
+                                </button>
+                            </div>
+                            <div v-else-if="this.indx === Questions.length - 1">
+                                <button 
+                                    type="button" 
+                                    class="btn text-start" 
+                                    id="btnNextResult" 
+                                    @click="$emit('showResult')"
+                                >
+                                    Total Result
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -41,10 +63,13 @@
 
 <script>
 import Logo1 from '@/assets/undraw_adventure_4hum 1.svg'
+// import axios from 'axios'
+import Questions from './questions.json'
+// import { reactive, toRefs } from 'vue'
 
     export default {
         name: 'Quiz-questions',
-        emits: ['showResult', 'showTrue'],
+        emits: ['showQuestion', 'showTrue', 'showResult'],
         props: {
             showNext: {
                 type: Boolean,
@@ -56,15 +81,37 @@ import Logo1 from '@/assets/undraw_adventure_4hum 1.svg'
                 paddingStyle: {
                     padding: '68px 32px'
                 },
-            
+                Questions,
+                indx: 0,
+                stringBtn: 'Next',
             }
         },
+        // mounted() {
+        //     axios
+        //     .get('https://restcountries.com/v3.1/name/sweden')
+        //     .then((response) => {
+        //         console.log(response.data)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err.message)
+        //     })
+        // },
         updated() {
             if(this.showNext === true) {
                 this.paddingStyle.padding = '68px 32px 18px'
             } else {
                 this.paddingStyle.padding = '68px 32px'
             }
+
+            // if(this.qIndex === this.Questions.length - 1) {
+            //     this.btnString = 'Result'
+            // } else {
+            //     this.btnString = 'Next'
+            // }
+
+            // const buttonString = document.getElementById('btnNextResult').textContent
+            // console.log(buttonString)
+            
         },
         setup() {
             return {
@@ -72,7 +119,19 @@ import Logo1 from '@/assets/undraw_adventure_4hum 1.svg'
             }
         },
         methods: {
-            
+            bNextOrResult(e) {
+                // if(e.currentTarget.textContent === 'Next') {
+                //     this.indx += 1
+                // } else {
+                //     this.indx -= (this.Questions.length - 1)
+                // }
+
+                if(e.currentTarget.textContent === 'Next') {
+                    this.indx += 1
+                } else {
+                    this.indx -= (this.Questions.length - 1)
+                }
+            }
         }
     }
 </script>
@@ -105,14 +164,14 @@ import Logo1 from '@/assets/undraw_adventure_4hum 1.svg'
 
 .btn:hover,
 .btn:focus,
-#btnNext {
+#btnNextResult {
     color: white;
     background-color: #F9A826;
     border: 1px solid #F9A826;
     opacity: 1;
 }
 
-#btnNext {
+#btnNextResult {
     font-weight: 700;
     width: fit-content;
     padding: 15px 47px;
