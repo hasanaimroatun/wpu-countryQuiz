@@ -1,0 +1,13 @@
+[
+    {
+        "question": "Kuala lumpur is the capital of",
+        "options": ["Vietnam", "Malaysia", "Sweden", "Austria"],
+        "answer": "Malaysia"
+    },
+    {
+        "question": "Which country does this flag belong to?",
+        "picURL": "https://flagcdn.com/w320/se.png",
+        "options": ["Vietnam", "Findland", "Sweden", "Austria"],
+        "answer": "Sweden"
+    }
+]
