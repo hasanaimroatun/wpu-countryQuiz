@@ -5,8 +5,8 @@
                 <img :src="Logo2" alt="logo2" id="logo2">
                 <h5 class="card-title">Results</h5>
                 <div class="btnContainer">
-                    <div class="result">You got <span>4</span> correct answers</div>
-                    <button type="button" class="btn" @click="$emit('showQuestions')">
+                    <div class="result">You got <span>{{getData}}</span> correct answers</div>
+                    <button type="button" class="btn" @click="$emit('showQuestions'); clearGetData()">
                         Try again
                     </button>
                 </div>
@@ -24,6 +24,17 @@ import Logo2 from '@/assets/undraw_winners_ao2o 2.svg'
         setup() {
             return {
                 Logo2
+            }
+        },
+        data() {
+            let getData = JSON.parse(localStorage.getItem('dataResult'))
+            return {
+                getData,
+            }
+        },
+        methods: {
+            clearGetData() {
+                this.getData = JSON.parse(localStorage.getItem('dataResult'))
             }
         }
     }
