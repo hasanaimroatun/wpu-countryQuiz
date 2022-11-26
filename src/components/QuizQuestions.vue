@@ -4,26 +4,15 @@
             <div class="card-body" :style="paddingStyle">
                 <img :src="Logo1" alt="logo1" id="logo1">
                 <div v-show="Questions[indx].picURL">
-                    <img :src="Questions[indx].picURL" alt="image" :style="{width: '80px', marginTop: '-32px', marginLeft: '72px'}" class="position-absolute start-0 translate-middle">
+                    <img 
+                        :src="Questions[indx].picURL" 
+                        alt="image" 
+                        :style="{width: '80px', marginTop: '-32px', marginLeft: '72px'}" 
+                        class="position-absolute start-0 translate-middle"
+                    >
                 </div>
                 <h5 class="card-title text-start">{{Questions[indx].question}}</h5> 
                 <div class="btnContainer d-flex flex-column gap-4">
-                    <!-- <button type="button" class="btn text-start" @click="$emit('showTrue')">
-                        <span>A</span>
-                        <span :style="{marginLeft: '15px'}">{{Questions[qIndex].options.a}}</span>
-                    </button>
-                    <button type="button" class="btn text-start" @click="$emit('showTrue')">
-                        <span>B</span>
-                        <span :style="{marginLeft: '15px'}">{{Questions[qIndex].options.b}}</span>
-                    </button>
-                    <button type="button" class="btn text-start" @click="$emit('showTrue')">
-                        <span>C</span>
-                        <span :style="{marginLeft: '15px'}">{{Questions[qIndex].options.c}}</span>
-                    </button>
-                    <button type="button" class="btn text-start" @click="$emit('showTrue')">
-                        <span>D</span>
-                        <span :style="{marginLeft: '15px'}">{{Questions[qIndex].options.d}}</span>
-                    </button> -->
                     <div v-for="(opt, index) in ['A', 'B', 'C', 'D']" :key="opt">
                         <button 
                             type="button" 
@@ -34,12 +23,19 @@
                         >
                             {{opt}} 
                             <span>{{Questions[indx].options[index]}}</span> 
-                            <span class="position-absolute end-0 translate-middle" :style="{marginRight: '42px', marginTop: '13px'}"></span>
+                            <span 
+                                class="position-absolute end-0 translate-middle" 
+                                :style="{marginRight: '42px', marginTop: '13px'}"
+                            />
                         </button> 
                     </div>
                     
                     <div v-show="showNext">
-                        <div class="d-flex justify-content-end" :style="{width: '400px'}" @click="bNextOrResult($event)">
+                        <div 
+                            class="d-flex justify-content-end" 
+                            :style="{width: '400px'}" 
+                            @click="bNextOrResult($event)"
+                        >
                             <div v-if="this.indx < Questions.length - 1">
                                 <button 
                                     type="button" 
@@ -56,7 +52,7 @@
                                     type="button" 
                                     class="btn text-start" 
                                     id="btnNextResult" 
-                                    @click="$emit('showResult'); bgDefault()"
+                                    @click="$emit('showResult'); bgDefault(); clearResult()"
                                 >
                                     Total Result
                                 </button>
@@ -113,16 +109,6 @@ import Questions from './questions.json'
             } else {
                 this.paddingStyle.padding = '68px 32px'
             }
-
-            // if(this.qIndex === this.Questions.length - 1) {
-            //     this.btnString = 'Result'
-            // } else {
-            //     this.btnString = 'Next'
-            // }
-
-            // const buttonString = document.getElementById('btnNextResult').textContent
-            // console.log(buttonString)
-            
         },
         setup() {
             return {
@@ -130,6 +116,9 @@ import Questions from './questions.json'
             }
         },
         methods: {
+            saveToLocal() {
+                localStorage.setItem('dataResult', JSON.stringify(this.result))
+            },
             bNextOrResult(e) {
                 if(e.currentTarget.textContent === 'Next') {
                     this.indx += 1
@@ -163,7 +152,6 @@ import Questions from './questions.json'
                         Object.assign(e.target.parentElement.style, {backgroundColor: '#EA8282', border: '1px solid #EA8282', color: 'white'})
                     }
                     
-                    
                     let icn = document.createElement("i")
                     icn.classList.add('fa-regular')
                     icn.classList.add('fa-circle-xmark')
@@ -173,14 +161,11 @@ import Questions from './questions.json'
                     } else {
                         e.target.nextSibling.append(icn)
                     }
-                   
                 }
                 
                 if (e.currentTarget.childNodes[1].textContent === this.Questions[this.indx].answer) {
                     this.result += 1
                 }
-
-                console.log(this.result)
 
                 this.isQuestion = false
                 
@@ -208,6 +193,15 @@ import Questions from './questions.json'
                 }, 200)
 
                 this.isQuestion = true
+
+            },
+            clearResult() {
+                this.saveToLocal()
+                this.result = 0
+
+                // setTimeout(() => {
+                //     this.result = 0
+                // }, 200)
             },
             over(e) {
                 if(this.isQuestion === true) {
@@ -218,7 +212,10 @@ import Questions from './questions.json'
                 if(this.isQuestion === true) {
                     Object.assign(e.target.style, {backgroundColor: 'white', border: '1px solid #6066D0', color: '#6066D0', opacity: '70%'})
                 }
-            }
+            },
+            // getScore() {
+            //     this.$emit('clicked', this.result)
+            // }
         }
     }
 </script>
