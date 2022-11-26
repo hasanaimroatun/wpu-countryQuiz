@@ -29,6 +29,8 @@
                             type="button" 
                             class="btn text-start option" 
                             @click="$emit('showTrue'); showTOrF($event)"
+                            @mouseover="over($event)"
+                            @mouseout="out($event)"
                         >
                             {{opt}} <span>{{Questions[indx].options[index]}}</span> 
                         </button> 
@@ -87,7 +89,8 @@ import Questions from './questions.json'
                 },
                 Questions,
                 indx: 0,
-                stringBtn: 'Next'
+                stringBtn: 'Next',
+                isQuestion: true,
             }
         },
         // mounted() {
@@ -157,7 +160,6 @@ import Questions from './questions.json'
                         // bOption[i].style.border = '1px solid #60BF88'
                         // bOption[i].style.color = 'white'
                         Object.assign(bOption[i].style, {backgroundColor: '#60BF88', border: '1px solid #60BF88', color: 'white'})
-                        
                     }
                     bOption[i].style.opacity = '1'
                 }
@@ -169,6 +171,8 @@ import Questions from './questions.json'
                     // e.target.style.color = 'white'
                     Object.assign(e.target.style, {backgroundColor: '#EA8282', border: '1px solid #EA8282', color: 'white'})
                 }
+
+                this.isQuestion = false
             },
             bgDefault() {
                 const bOption = document.querySelectorAll('.option')
@@ -177,16 +181,30 @@ import Questions from './questions.json'
                     // bOption[i].style.border = '1px solid #6066D0'
                     // bOption[i].style.color = '#6066D0'
                     // bOption[i].style.opacity = '70%'
+                    
                     Object.assign(bOption[i].style, {backgroundColor: 'white', border: '1px solid #6066D0', color: '#6066D0', opacity: '70%'})
+                    
+                }
+
+                this.isQuestion = true
+            },
+            // bgFocusHover() {
+            //     const bOption = document.querySelectorAll('.option')
+            //     for(let i = 0; i < bOption.length; i++) {
+            //         bOption[i].style.backgroundColor = '#F9A826'
+            //         bOption[i].style.border = '1px solid #F9A826'
+            //         bOption[i].style.color = '#white'
+            //         bOption[i].style.opacity = '1'
+            //     }
+            // },
+            over(e) {
+                if(this.isQuestion === true) {
+                    Object.assign(e.target.style, {backgroundColor: '#F9A826', border: '1px solid #F9A826', color: 'white', opacity: '1'})
                 }
             },
-            bgFocusHover() {
-                const bOption = document.querySelectorAll('.option')
-                for(let i = 0; i < bOption.length; i++) {
-                    bOption[i].style.backgroundColor = '#F9A826'
-                    bOption[i].style.border = '1px solid #F9A826'
-                    bOption[i].style.color = '#white'
-                    bOption[i].style.opacity = '1'
+            out(e) {
+                if(this.isQuestion === true) {
+                    Object.assign(e.target.style, {backgroundColor: 'white', border: '1px solid #6066D0', color: '#6066D0', opacity: '70%'})
                 }
             }
         }
@@ -219,18 +237,18 @@ import Questions from './questions.json'
     opacity: 70%;
 }
 
-.btn:hover,
-.btn:focus,
 #btnNextResult {
+    font-weight: 700;
+    width: fit-content;
+    padding: 15px 47px;
     color: white;
     background-color: #F9A826;
     border: 1px solid #F9A826;
     opacity: 1;
 }
 
-#btnNextResult {
-    font-weight: 700;
-    width: fit-content;
-    padding: 15px 47px;
+#btnNextResult:hover {
+    background-color: #ff771d;
+    border: 1px solid #ff771d;
 }
 </style>
