@@ -87,7 +87,7 @@ import Questions from './questions.json'
                 },
                 Questions,
                 indx: 0,
-                stringBtn: 'Next',
+                stringBtn: 'Next'
             }
         },
         // mounted() {
@@ -148,31 +148,36 @@ import Questions from './questions.json'
                 //     e.target.style.border = '1px solid #EA8282'
                 //     e.target.style.color = 'white'
                 // }
+               
 
                 const bOption = document.querySelectorAll('.option')
                 for(let i = 0; i < bOption.length; i++) {
                     if(bOption[i].childNodes[1].textContent === this.Questions[this.indx].answer) {
-                        bOption[i].style.backgroundColor = '#60BF88'
-                        bOption[i].style.border = '1px solid #60BF88'
-                        bOption[i].style.color = 'white'
+                        // bOption[i].style.backgroundColor = '#60BF88'
+                        // bOption[i].style.border = '1px solid #60BF88'
+                        // bOption[i].style.color = 'white'
+                        Object.assign(bOption[i].style, {backgroundColor: '#60BF88', border: '1px solid #60BF88', color: 'white'})
+                        
                     }
                     bOption[i].style.opacity = '1'
                 }
 
                 if(e.currentTarget.childNodes[1].textContent !== this.Questions[this.indx].answer){
                     console.log(false)
-                    e.target.style.backgroundColor = '#EA8282'
-                    e.target.style.border = '1px solid #EA8282'
-                    e.target.style.color = 'white'
+                    // e.target.style.backgroundColor = '#EA8282'
+                    // e.target.style.border = '1px solid #EA8282'
+                    // e.target.style.color = 'white'
+                    Object.assign(e.target.style, {backgroundColor: '#EA8282', border: '1px solid #EA8282', color: 'white'})
                 }
             },
             bgDefault() {
                 const bOption = document.querySelectorAll('.option')
                 for(let i = 0; i < bOption.length; i++) {
-                    bOption[i].style.backgroundColor = 'white'
-                    bOption[i].style.border = '1px solid #6066D0'
-                    bOption[i].style.color = '#6066D0'
-                    bOption[i].style.opacity = '70%'
+                    // bOption[i].style.backgroundColor = 'white'
+                    // bOption[i].style.border = '1px solid #6066D0'
+                    // bOption[i].style.color = '#6066D0'
+                    // bOption[i].style.opacity = '70%'
+                    Object.assign(bOption[i].style, {backgroundColor: 'white', border: '1px solid #6066D0', color: '#6066D0', opacity: '70%'})
                 }
             },
             bgFocusHover() {
