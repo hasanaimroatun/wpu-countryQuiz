@@ -29,10 +29,12 @@
                             type="button" 
                             class="btn text-start option" 
                             @click="$emit('showTrue'); showTOrF($event)"
-                            @mouseover="over($event)"
-                            @mouseout="out($event)"
+                            @mouseenter="over($event)"
+                            @mouseleave="out($event)"
                         >
-                            {{opt}} <span>{{Questions[indx].options[index]}}</span> 
+                            {{opt}} 
+                            <span>{{Questions[indx].options[index]}}</span> 
+                            <span class="position-absolute end-0 translate-middle" :style="{marginRight: '42px', marginTop: '13px'}"></span>
                         </button> 
                     </div>
                     
@@ -91,18 +93,20 @@ import Questions from './questions.json'
                 indx: 0,
                 stringBtn: 'Next',
                 isQuestion: true,
+                result: 0,
             }
         },
-        // mounted() {
-        //     axios
-        //     .get('https://restcountries.com/v3.1/name/sweden')
-        //     .then((response) => {
-        //         console.log(response.data)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err.message)
-        //     })
-        // },
+        mounted() {
+            // axios
+            // .get('https://restcountries.com/v3.1/name/sweden')
+            // .then((response) => {
+            //     console.log(response.data)
+            // })
+            // .catch((err) => {
+            //     console.log(err.message)
+            // })
+            
+        },
         updated() {
             if(this.showNext === true) {
                 this.paddingStyle.padding = '68px 32px 18px'
@@ -127,12 +131,6 @@ import Questions from './questions.json'
         },
         methods: {
             bNextOrResult(e) {
-                // if(e.currentTarget.textContent === 'Next') {
-                //     this.indx += 1
-                // } else {
-                //     this.indx -= (this.Questions.length - 1)
-                // }
-
                 if(e.currentTarget.textContent === 'Next') {
                     this.indx += 1
                 } else {
@@ -140,63 +138,77 @@ import Questions from './questions.json'
                 }
             },
             showTOrF(e) {
-                // if(e.currentTarget.childNodes[1].textContent === this.Questions[this.indx].answer){
-                //     console.log(true)
-                //     e.target.style.backgroundColor = '#60BF88'
-                //     e.target.style.border = '1px solid #60BF88'
-                //     e.target.style.color = 'white'
-                // } else {
-                //     console.log(false) 
-                //     e.target.style.backgroundColor = '#EA8282'
-                //     e.target.style.border = '1px solid #EA8282'
-                //     e.target.style.color = 'white'
-                // }
-               
-
                 const bOption = document.querySelectorAll('.option')
+                
                 for(let i = 0; i < bOption.length; i++) {
                     if(bOption[i].childNodes[1].textContent === this.Questions[this.indx].answer) {
-                        // bOption[i].style.backgroundColor = '#60BF88'
-                        // bOption[i].style.border = '1px solid #60BF88'
-                        // bOption[i].style.color = 'white'
                         Object.assign(bOption[i].style, {backgroundColor: '#60BF88', border: '1px solid #60BF88', color: 'white'})
+                        let icn = document.createElement("i")
+                        icn.classList.add('fa-regular')
+                        icn.classList.add('fa-circle-check')
+
+                        if(bOption[i].childNodes[2].childNodes.length === 0) {
+                            bOption[i].childNodes[2].append(icn)
+                        }
                     }
                     bOption[i].style.opacity = '1'
                 }
 
                 if(e.currentTarget.childNodes[1].textContent !== this.Questions[this.indx].answer){
                     console.log(false)
-                    // e.target.style.backgroundColor = '#EA8282'
-                    // e.target.style.border = '1px solid #EA8282'
-                    // e.target.style.color = 'white'
-                    Object.assign(e.target.style, {backgroundColor: '#EA8282', border: '1px solid #EA8282', color: 'white'})
+    
+                    if(e.target.classList.contains('btn')) {
+                        Object.assign(e.target.style, {backgroundColor: '#EA8282', border: '1px solid #EA8282', color: 'white'})
+                    } else {
+                        Object.assign(e.target.parentElement.style, {backgroundColor: '#EA8282', border: '1px solid #EA8282', color: 'white'})
+                    }
+                    
+                    
+                    let icn = document.createElement("i")
+                    icn.classList.add('fa-regular')
+                    icn.classList.add('fa-circle-xmark')
+
+                    if(e.target.classList.contains('btn')) {
+                        e.target.childNodes[2].append(icn)
+                    } else {
+                        e.target.nextSibling.append(icn)
+                    }
+                   
+                }
+                
+                if (e.currentTarget.childNodes[1].textContent === this.Questions[this.indx].answer) {
+                    this.result += 1
                 }
 
+                console.log(this.result)
+
                 this.isQuestion = false
+                
+            },
+            clearIcon() {
+                const bOption = document.querySelectorAll('.option')
+                for(let i = 0; i < bOption.length; i++) {
+                    if(bOption[i].childNodes[2].childNodes.length !== 0) {
+                        bOption[i].childNodes[2].childNodes[0].remove()
+                    }
+                }
             },
             bgDefault() {
                 const bOption = document.querySelectorAll('.option')
                 for(let i = 0; i < bOption.length; i++) {
-                    // bOption[i].style.backgroundColor = 'white'
-                    // bOption[i].style.border = '1px solid #6066D0'
-                    // bOption[i].style.color = '#6066D0'
-                    // bOption[i].style.opacity = '70%'
-                    
                     Object.assign(bOption[i].style, {backgroundColor: 'white', border: '1px solid #6066D0', color: '#6066D0', opacity: '70%'})
                     
+                    if(bOption[i].childNodes[2].childNodes.length !== 0) {
+                        bOption[i].childNodes[2].childNodes[0].remove()
+                    }
                 }
+
+                setTimeout(() => {
+                    this.clearIcon()
+                }, 200)
 
                 this.isQuestion = true
             },
-            // bgFocusHover() {
-            //     const bOption = document.querySelectorAll('.option')
-            //     for(let i = 0; i < bOption.length; i++) {
-            //         bOption[i].style.backgroundColor = '#F9A826'
-            //         bOption[i].style.border = '1px solid #F9A826'
-            //         bOption[i].style.color = '#white'
-            //         bOption[i].style.opacity = '1'
-            //     }
-            // },
             over(e) {
                 if(this.isQuestion === true) {
                     Object.assign(e.target.style, {backgroundColor: '#F9A826', border: '1px solid #F9A826', color: 'white', opacity: '1'})
