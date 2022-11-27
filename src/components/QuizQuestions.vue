@@ -69,7 +69,6 @@
 import Logo1 from '@/assets/undraw_adventure_4hum 1.svg'
 // import axios from 'axios'
 import Questions from './questions.json'
-// import { reactive, toRefs } from 'vue'
 
     export default {
         name: 'Quiz-questions',
@@ -92,17 +91,17 @@ import Questions from './questions.json'
                 result: 0,
             }
         },
-        mounted() {
-            // axios
-            // .get('https://restcountries.com/v3.1/name/sweden')
-            // .then((response) => {
-            //     console.log(response.data)
-            // })
-            // .catch((err) => {
-            //     console.log(err.message)
-            // })
+        // mounted() {
+        //     axios
+        //     .get('https://restcountries.com/v3.1/region/asia')
+        //     .then((response) => {
+        //         console.log(response.data)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err.message)
+        //     })
             
-        },
+        // },
         updated() {
             if(this.showNext === true) {
                 this.paddingStyle.padding = '68px 32px 18px'
@@ -144,8 +143,6 @@ import Questions from './questions.json'
                 }
 
                 if(e.currentTarget.childNodes[1].textContent !== this.Questions[this.indx].answer){
-                    console.log(false)
-    
                     if(e.target.classList.contains('btn')) {
                         Object.assign(e.target.style, {backgroundColor: '#EA8282', border: '1px solid #EA8282', color: 'white'})
                     } else {
@@ -168,7 +165,6 @@ import Questions from './questions.json'
                 }
 
                 this.isQuestion = false
-                
             },
             clearIcon() {
                 const bOption = document.querySelectorAll('.option')
@@ -193,15 +189,10 @@ import Questions from './questions.json'
                 }, 200)
 
                 this.isQuestion = true
-
             },
             clearResult() {
                 this.saveToLocal()
                 this.result = 0
-
-                // setTimeout(() => {
-                //     this.result = 0
-                // }, 200)
             },
             over(e) {
                 if(this.isQuestion === true) {
@@ -212,10 +203,7 @@ import Questions from './questions.json'
                 if(this.isQuestion === true) {
                     Object.assign(e.target.style, {backgroundColor: 'white', border: '1px solid #6066D0', color: '#6066D0', opacity: '70%'})
                 }
-            },
-            // getScore() {
-            //     this.$emit('clicked', this.result)
-            // }
+            }
         }
     }
 </script>
