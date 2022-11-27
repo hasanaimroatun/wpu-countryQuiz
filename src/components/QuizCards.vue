@@ -45,10 +45,7 @@ import QuizResult from './QuizResult.vue'
             },
             sTrueOrFalse() {
                 this.showNext = true
-            },
-            // getScoreResult(value) {
-            //     console.log(value)
-            // }
+            }
         },
        
     }
