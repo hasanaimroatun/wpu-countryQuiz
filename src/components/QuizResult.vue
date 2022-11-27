@@ -6,7 +6,7 @@
                 <h5 class="card-title">Results</h5>
                 <div class="btnContainer">
                     <div class="result">You got <span>{{getData}}</span> correct answers</div>
-                    <button type="button" class="btn" @click="$emit('showQuestions'); clearGetData()">
+                    <button type="button" class="btn" @click="$emit('showQuestions'); reloadPage()">
                         Try again
                     </button>
                 </div>
@@ -33,8 +33,8 @@ import Logo2 from '@/assets/undraw_winners_ao2o 2.svg'
             }
         },
         methods: {
-            clearGetData() {
-                this.getData = JSON.parse(localStorage.getItem('dataResult'))
+            reloadPage() {
+                window.location.reload()
             }
         }
     }
