@@ -31,4 +31,16 @@ body {
   background-repeat: no-repeat;
   background-size: 100vw;
 }
+
+@media screen and (max-width: 992px) {
+  body {
+    background-size: 150vw;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  body {
+    background-size: 180vw;
+  }
+}
 </style>

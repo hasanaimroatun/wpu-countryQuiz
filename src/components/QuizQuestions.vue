@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card text-center" :style="{width: '464px', background: 'white'}">
+        <div class="card text-center">
             <div class="card-body" :style="paddingStyle">
                 <img :src="Logo1" alt="logo1" id="logo1">
                 <div v-show="Questions[indx].picURL">
@@ -12,7 +12,7 @@
                     >
                 </div>
                 <h5 class="card-title text-start">{{Questions[indx].question}}</h5> 
-                <div class="btnContainer d-flex flex-column gap-4">
+                <div class="btnContainer d-flex flex-column">
                     <div v-for="(opt, index) in ['A', 'B', 'C', 'D']" :key="opt">
                         <button 
                             type="button" 
@@ -24,16 +24,14 @@
                             {{opt}} 
                             <span>{{Questions[indx].options[index]}}</span> 
                             <span 
-                                class="position-absolute end-0 translate-middle" 
-                                :style="{marginRight: '42px', marginTop: '13px'}"
+                                class="position-absolute end-0 translate-middle iContainer" 
                             />
                         </button> 
                     </div>
                     
                     <div v-show="showNext">
                         <div 
-                            class="d-flex justify-content-end" 
-                            :style="{width: '400px'}" 
+                            class="d-flex justify-content-end nextResultBtnContainer" 
                             @click="bNextOrResult($event)"
                         >
                             <div v-if="this.indx < Questions.length - 1">
@@ -197,6 +195,11 @@ import Questions from './questions.json'
 </script>
 
 <style scoped>
+.card {
+    width: 464px;
+    background-color: white;
+}
+
 .card-body {
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
@@ -213,6 +216,10 @@ import Questions from './questions.json'
     margin-bottom: 32px;
 }
 
+.btnContainer {
+    gap: 23px;
+}
+
 .btn {
     width: 400px;
     height: 56px;
@@ -220,6 +227,11 @@ import Questions from './questions.json'
     color: #6066D0;
     border: 1px solid #6066D0;
     opacity: 70%;
+}
+
+.iContainer {
+    margin-right: 42px;
+    margin-top: 13px;
 }
 
 #btnNextResult {
@@ -235,5 +247,48 @@ import Questions from './questions.json'
 #btnNextResult:hover {
     background-color: #ff771d;
     border: 1px solid #ff771d;
+}
+
+@media screen and (max-width: 576px) {
+    .card {
+        width: 300px;
+    }
+
+    #logo1 {
+        left: 200px;
+        width: 99px;
+    }
+
+    .card-title {
+        margin-bottom: 22px;
+        font-size: 18px;
+    }
+
+    .btnContainer {
+        gap: 15px;
+    }
+
+    .btn {
+        width: 235px;
+        height: 43px;
+        padding-left: 19px;
+    }
+
+    .option {
+        font-size: 13px;
+    }
+
+    .iContainer {
+        margin-top: 10px;
+    }
+
+    #btnNextResult {
+        padding: 8px 37px;
+        font-size: 15px;
+    }
+
+    .nextResultBtnContainer {
+        width: 235px;
+    }
 }
 </style>

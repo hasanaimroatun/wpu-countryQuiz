@@ -13,7 +13,7 @@
                 />
             </keep-alive>
         </div>
-        <div class="createdBy position-absolute bottom-0 start-50 translate-middle-x">
+        <div class="createdBy position-absolute start-50 translate-middle-x">
             created by <a href="https://github.com/hasanaimroatun/wpu-countryQuiz">hasanaimroatun</a> - devChallenges.io
         </div>
     </div>
@@ -68,6 +68,7 @@ import QuizResult from './QuizResult.vue'
     line-height: 17.07px;
     font-weight: 500;
     color: #F2F2F2;
+    top: 638px;
 }
 
 .createdBy a {
@@ -78,5 +79,16 @@ import QuizResult from './QuizResult.vue'
 
 .createdBy a:hover {
     color: #F9A826;
+}
+
+@media screen and (max-width: 576px) {
+    #title {
+        width: 300px;
+        font-size: 25px;
+    }
+
+    .createdBy {
+        top: 550px;
+    }
 }
 </style>

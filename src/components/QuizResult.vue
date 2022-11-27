@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card text-center" :style="{width: '464px', background: 'white'}">
+        <div class="card text-center">
             <div class="card-body">
                 <img :src="Logo2" alt="logo2" id="logo2">
                 <h5 class="card-title">Results</h5>
@@ -41,6 +41,11 @@ import Logo2 from '@/assets/undraw_winners_ao2o 2.svg'
 </script>
 
 <style scoped>
+.card {
+    width: 464px;
+    background-color: white;
+}
+
 .card-body {
     padding: 49px 78px 33px;
     font-family: 'Poppins', sans-serif;
@@ -54,7 +59,7 @@ import Logo2 from '@/assets/undraw_winners_ao2o 2.svg'
     font-weight: 700;
     font-size: 48px;
     line-height: 72px;
-    margin-top: 72px;
+    margin-top: 52px;
     color: #1D355D;
 }
 
@@ -64,6 +69,7 @@ import Logo2 from '@/assets/undraw_winners_ao2o 2.svg'
     line-height: 54px;
     color: #1D355D;
     white-space: nowrap;
+    margin-top: -20px;
 }
 
 .btnContainer .result span {
@@ -74,7 +80,7 @@ import Logo2 from '@/assets/undraw_winners_ao2o 2.svg'
 
 .btn {
     padding: 15px 61px;
-    margin-top: 71px;
+    margin-top: 51px;
     font-weight: 600;
     font-size: 18px;
     line-height: 27px;
@@ -86,6 +92,40 @@ import Logo2 from '@/assets/undraw_winners_ao2o 2.svg'
 .btn:focus {
     background-color: #1D355D;
     color: white;
+}
+
+@media screen and (max-width: 576px) {
+    .card {
+        width: 300px;
+    }
+
+    #logo2 {
+        width: 200px;
+    }
+
+    .card-body {
+        padding: 39px 38px 34px;
+    }
+
+    .card-title {
+        font-size: 35px;
+        margin-top: 42px;
+    }
+
+    .btnContainer {
+        font-size: 15px;
+        margin-top: -30px;
+    }
+
+    .btnContainer .result span {
+        font-size: 28px;
+    }
+
+    .btn {
+        padding: 10px 51px;
+        margin-top: 28px;
+        font-size: 15px;
+    }
 }
 
 </style>
