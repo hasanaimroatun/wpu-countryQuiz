@@ -67,7 +67,6 @@
 
 <script>
 import Logo1 from '@/assets/undraw_adventure_4hum 1.svg'
-// import axios from 'axios'
 import Questions from './questions.json'
 
     export default {
@@ -91,17 +90,6 @@ import Questions from './questions.json'
                 result: 0,
             }
         },
-        // mounted() {
-        //     axios
-        //     .get('https://restcountries.com/v3.1/region/asia')
-        //     .then((response) => {
-        //         console.log(response.data)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err.message)
-        //     })
-            
-        // },
         updated() {
             if(this.showNext === true) {
                 this.paddingStyle.padding = '68px 32px 18px'
