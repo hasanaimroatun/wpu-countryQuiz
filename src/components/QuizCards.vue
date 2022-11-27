@@ -75,4 +75,8 @@ import QuizResult from './QuizResult.vue'
     text-decoration: none;
     font-weight: 700;
 }
+
+.createdBy a:hover {
+    color: #F9A826;
+}
 </style>
