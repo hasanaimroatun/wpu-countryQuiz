@@ -9,5 +9,46 @@
         "picURL": "https://flagcdn.com/w320/se.png",
         "options": ["Vietnam", "Findland", "Sweden", "Austria"],
         "answer": "Sweden"
+    },
+    {
+        "question": "Capital of Germany is",
+        "options": ["Vaduz", "Lima", "Stockholm", "Quito"],
+        "answer": "Vaduz"
+    },
+    {
+        "question": "Which country is part of Southern Asia",
+        "options": ["Kyrgyz Republic", "Republic of India", "Korea", "Republic of Iraq"],
+        "answer": "Republic of India"
+    },
+    {
+        "question": "This countries below have Euro as the currency, except",
+        "options": ["Republic of Peru", "Republic of Slovenia", "Republic of Latvia", "French Republic"],
+        "answer": "Republic of Peru"
+    },
+    {
+        "question": "Which country does not speak Spannish",
+        "options": ["Argentine Republic", "Republic of Honduras", "Republic of Costa Rica", "Republic of Croatia"],
+        "answer": "Republic of Croatia"
+    },
+    {
+        "question": "The country does this flag belong located in ... region",
+        "picURL": "https://flagcdn.com/w320/cn.png",
+        "options": ["Africa", "Asia", "Americas", "Oceania"],
+        "answer": "Asia"
+    },
+    {
+        "question": "Antananarivo is the capital of",
+        "options": ["Republic of Liberia", "Republic of Malawi", "Republic of Guinea", "Republic of Madagascar"],
+        "answer": "Republic of Madagascar"
+    },
+    {
+        "question": "Baht (฿) is the currency of",
+        "options": ["Thailand", "Qatar", "Republic of Uzbekistan", "Republic of Turkey"],
+        "answer": "Thailand"
+    },
+    {
+        "question": "The capital of Viet Nam is",
+        "options": ["Dili", "Thimphu", "Hanoi", "Naypyidaw"],
+        "answer": "Hanoi"
     }
 ]
